@@ -1,0 +1,47 @@
+<div class="usuarios-container">
+    <h1>Lista de usuarios</h1>
+    <a [routerLink]="['/usuario']" class="btn-add">Agregar usuario</a>
+
+    <!-- <h1 *ngIf="authService.isAdmin()">Esto solo lo puede ver el admin</h1> -->
+
+    <table class="usuarios-table animate__animated animate__fadeIn">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Imagen</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido paterno</th>
+                <th>Apellido materno</th>
+                <th>Email</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (usuario of usuarios; track usuario.idUsuario) {
+            <tr>
+                <td class="acciones">
+                    <a [routerLink]="['/usuario', usuario.idUsuario]" class="btn-edit"><i
+                            class="bi bi-pen-fill"></i></a>
+                    <a (click)="eliminar(usuario.idUsuario!)" class="btn-delete"><i class="bi bi-trash3-fill"></i></a>
+                </td>
+                <td>
+                    <img *ngIf="usuario.imagen; else placeholder" [src]="usuario.imagen" alt="Foto de perfil"
+                        class="profile-img">
+
+                    <ng-template #placeholder>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" alt="Sin imagen"
+                            class="profile-img">
+                    </ng-template>
+                </td>
+                <td>{{ usuario.idUsuario }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellidoPaterno }}</td>
+                <td>{{ usuario.apellidoMaterno }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.rol.nombre }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

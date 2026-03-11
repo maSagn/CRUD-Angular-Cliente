@@ -1,0 +1,56 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="guardar()" enctype="multipart/form-data" class="usuario-form animate__animated animate__bounceInDown">
+    <h1>{{ idUsuario ? 'Actualizar' : 'Crear' }}</h1>
+
+    <div class="form-group">
+        <label>Imagen:</label>
+        <img *ngIf="previewImagen" [src]="previewImagen" class="profile-img mb-2">
+        <img *ngIf="!previewImagen" src="https://cdn-icons-png.flaticon.com/512/1053/1053244.png" class="profile-img mb-2">
+
+        <input type="file" class="form-control" accept="image/*" (change)="onFileSelect($event)" name="imagen" id="imagen">
+    </div>
+
+    <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" formControlName="nombre" class="form-input">
+        <span class="error-msg" *ngIf="usuarioForm.get('nombre')?.touched && usuarioForm.get('nombre')?.invalid">
+            Solo se permiten letras.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label>Apellido paterno:</label>
+        <input type="text" formControlName="apellidoPaterno" class="form-input">
+        <span class="error-msg" *ngIf="usuarioForm.get('apellidoPaterno')?.touched && usuarioForm.get('apellidoPaterno')?.invalid">
+            Solo se permiten letras.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label>Apellido materno:</label>
+        <input type="text" formControlName="apellidoMaterno" class="form-input">
+        <span class="error-msg" *ngIf="usuarioForm.get('apellidoMaterno')?.touched && usuarioForm.get('apellidoMaterno')?.invalid">
+            Solo se permiten letras.
+        </span>
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" formControlName="email" class="form-input">
+        <span class="error-msg" *ngIf="usuarioForm.get('email')?.touched && usuarioForm.get('email')?.invalid">
+            Formato de correo inválido.
+        </span>
+    </div>
+
+    <div class="form-group" *ngIf="authService.isAdmin()">
+        <label>Rol:</label>
+        <select formControlName="rol" class="form-select" [compareWith]="compararRoles">
+            <option value="">Selecciona un rol</option>
+            <option *ngFor="let rol of roles" [ngValue]="rol">{{ rol.nombre }}</option>
+        </select>
+        <span class="error-msg" *ngIf="usuarioForm.get('rol')?.touched && usuarioForm.get('rol')?.invalid">
+            Selecciona un rol.
+        </span>
+    </div>
+
+    <button type="submit" class="btn-submit">{{ idUsuario ? 'Actualizar' : 'Crear' }}</button>
+</form>

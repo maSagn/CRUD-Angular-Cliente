@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProyectAngular';
+
+  isLoginPage = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const rutasOcultas = ['/login', '/403'];
+        this.isLoginPage = rutasOcultas.includes(event.urlAfterRedirects);
+        //this.isLoginPage = event.urlAfterRedirects === '/login';
+      }
+    });
+  }
 }

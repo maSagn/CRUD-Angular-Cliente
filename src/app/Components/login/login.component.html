@@ -1,0 +1,18 @@
+
+<div class="login-page">
+    <div class="form">
+        <!-- <form class="register-form">
+            <input type="text" placeholder="name" />
+            <input type="password" placeholder="password" />
+            <input type="text" placeholder="email address" />
+            <button>create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form> -->
+        <form class="login-form" (ngSubmit)="login()">
+            <input type="email" name="email" [(ngModel)]="usuario.email" placeholder="email" required />
+            <input type="password" name="password" [(ngModel)]="usuario.password" placeholder="password" required />
+            <button type="submit">login</button>
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </form>
+    </div>
+</div>

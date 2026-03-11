@@ -1,0 +1,53 @@
+.custom-navbar{
+    background: linear-gradient(135deg,#4CAF50,#2e7d32);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+}
+
+/* titulo */
+.brand-title{
+    color: white !important;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: .5px;
+}
+
+/* links */
+.nav-custom{
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: all .25s ease;
+    border-radius: 6px;
+    padding: 8px 12px !important;
+}
+
+.nav-custom:hover{
+    background: rgba(255,255,255,0.2);
+    color: white !important;
+}
+
+/* boton logout */
+.logout-btn{
+    background: white;
+    color: #2e7d32;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logout-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* iconos */
+.navbar i{
+    margin-right: 5px;
+}
