@@ -59,6 +59,12 @@ export class UsuarioFormComponent {
     // Revisar si hay un id en la ruta
     this.idUsuario = Number(this.route.snapshot.paramMap.get('id'));
 
+    const idUsuarioLogueado = this.authService.getUserId();
+
+    if (this.idUsuario && idUsuarioLogueado !== this.idUsuario && !this.authService.isAdmin()) {
+      this.router.navigate(['/myAccount']);
+    }
+
     // Traer roles
     this.rolService.getAll().subscribe(rolesData => {
       console.log("Roles recibidos: ", rolesData);
@@ -99,10 +105,25 @@ export class UsuarioFormComponent {
 
   }
 
+  // Imagen
   onFileSelect(event: any) {
     const file = event.target.files[0];
 
     if (!file) return;
+
+    const tiposPermitidos = ['image/png', 'image/jpeg', 'image/jpg'];
+
+    if (!tiposPermitidos.includes(file.type)) {
+
+      Swal.fire({
+        title: "Error",
+        text: "Solo puedes ingresar imagenes",
+        icon: "error"
+      });
+
+      event.target.value = '';
+      return;
+    }
 
     const reader = new FileReader();
 
